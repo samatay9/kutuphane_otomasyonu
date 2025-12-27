@@ -1,0 +1,396 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    KÜTÜPHANE YÖNETİM SİSTEMİ - ÖZELLİKLER LİSTESİ
+═══════════════════════════════════════════════════════════════════════════════
+
+1. KULLANICI YÖNETİMİ VE GÜVENLİK
+───────────────────────────────────────────────────────────────────────────────
+
+1.1. Roller Sistemi
+   • Admin: Tam yetki, tüm sistem yönetimi
+   • Librarian (Kütüphaneci): Kitap, ödünç/iade, üye yönetimi
+   • Accountant (Muhasebeci): Finansal işlemler, cezalar, raporlar
+   • Member (Üye): Temel üye işlemleri
+   • Student (Öğrenci): Öğrenci avantajları (21 gün ödünç, 5 kitap limiti)
+   • Teacher (Öğretmen): Öğretmen avantajları (30 gün ödünç, 7 kitap limiti)
+
+1.2. Güvenlik Özellikleri
+   • Şifre Hashleme: SHA-256 algoritması ile güvenli şifre saklama
+   • TOTP 2FA: QR kod ile kurulum, Google Authenticator uyumlu
+   • Şifre Sıfırlama: E-posta doğrulama kodu ile güvenli şifre sıfırlama
+   • TC Kimlik Doğrulama: TC Kimlik servisi entegrasyonu
+   • E-posta Doğrulama: Kayıt sırasında e-posta doğrulama kodu gönderimi
+   • Sistem Logları: Tüm işlemler loglanır (IP, tarih, kullanıcı)
+
+1.3. Giriş/Kayıt Sistemi
+   • Kullanıcı adı veya e-posta ile giriş
+   • Kayıt: TC Kimlik, telefon, adres, e-posta bilgileri
+   • E-posta doğrulama kodu (10 dakika geçerli)
+   • Animasyonlu slider (Login/Register geçişi)
+
+
+2. KİTAP YÖNETİMİ
+───────────────────────────────────────────────────────────────────────────────
+
+2.1. Kitap İşlemleri
+   • Kitap Ekleme: Başlık, yazar, ISBN, kopya sayısı, açıklama, resim
+   • Kitap Düzenleme: Tüm bilgiler güncellenebilir
+   • Kitap Silme: Onay ile silme
+   • Kitap Arama: Başlık, yazar, ISBN ile arama
+   • Kategori Filtreleme: Çoklu kategori desteği
+   • Stok Takibi: Toplam ve müsait kopya sayısı
+
+2.2. Google Books Entegrasyonu
+   • Google Books API ile kitap arama
+   • Otomatik bilgi çekme (yazar, ISBN, açıklama, resim)
+   • Türkçe dil desteği
+
+2.3. Kategori Yönetimi
+   • Çoklu Kategori: Bir kitap birden fazla kategoriye ait olabilir
+   • Otomatik Kategori Tahmini: Başlık/yazar/açıklamadan kategori tahmini
+   • Kategori Ekleme/Düzenleme/Silme
+   • Kategori bazlı raporlama
+
+2.4. Kitap Görselleştirme
+   • Kart Görünümü: Modern kart tasarımı
+   • Detay Sayfası: Tam bilgiler, resim, ödünç alma
+   • Resim Yükleme: Yerel dosya seçimi
+   • Resim Saklama: Images/Books/ klasörü
+
+
+3. ÖDÜNÇ VERME/İADE SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+3.1. Ödünç Verme Kuralları
+   • Kitap Limiti:
+     - Member: 5 kitap
+     - Student: 5 kitap
+     - Teacher: 7 kitap
+   • Ödünç Süresi:
+     - Member: 14 gün
+     - Student: 21 gün
+     - Teacher: 30 gün
+   • Ceza Kontrolü: 2 veya daha fazla ödenmemiş ceza kartı varsa ödünç verilmez
+   • Stok Kontrolü: Müsait kopya kontrolü
+
+3.2. İade İşlemleri
+   • Manuel İade: Kütüphaneci tarafından iade işlemi
+   • Otomatik Ceza: Gecikme durumunda otomatik ceza uygulanır
+   • Bildirim: İade sonrası kullanıcıya bildirim
+
+3.3. Rezervasyon Sistemi
+   • Kitap Rezervasyonu: Stokta yoksa rezervasyon yapılabilir
+   • Masa Rezervasyonu: Çalışma masaları için rezervasyon
+   • Rezervasyon Bildirimi: Stok geldiğinde bildirim
+
+
+4. CEZA SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+4.1. Ceza Kuralları
+   • Kural Tanımlama: Gecikme başına tutar belirleme
+   • Otomatik Ceza: Gecikme durumunda otomatik ceza uygulanır
+   • Manuel Ceza: Kütüphaneci tarafından manuel ceza eklenebilir
+
+4.2. Ceza Ödeme
+   • Bakiye ile Ödeme: Normal ve çekilebilir bakiye birlikte kullanılır
+   • Ceza Kartları: Görsel kartlar, ödeme butonu
+   • Ödeme Geçmişi: Tüm ödemeler kayıtlı
+
+
+5. FİNANSAL SİSTEM
+───────────────────────────────────────────────────────────────────────────────
+
+5.1. Bakiye Yönetimi
+   • Bakiye Ekleme: IBAN veya Stripe ile bakiye ekleme
+   • Bakiye Çekme: Onay sistemi ile bakiye çekme
+   • Çekilebilir Bakiye: Ayrı takip edilen çekilebilir bakiye
+   • Bakiye Geçmişi: Tüm işlemler kayıtlı
+
+5.2. Ödeme Yöntemleri
+   • IBAN: Manuel onay ile IBAN ödemesi
+   • Stripe: Kredi kartı ödemeleri
+   • Ödeme Onayı: Muhasebeci onayı
+
+5.3. Kitap Ücretleri
+   • Kitap Fiyatlandırma: Her kitap için fiyat belirleme
+   • Ücret Ekleme: Kitap başına ücret ekleme
+   • Ücret Geçmişi: Tüm ücretler kayıtlı
+
+5.4. Finansal Raporlar
+   • Gelir-Gider Raporu: Tarih aralığı ile rapor
+   • Excel/CSV Export: Rapor dışa aktarma
+   • Grafikler: Aylık gelir-gider grafikleri
+
+
+6. BİLDİRİM SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+6.1. Bildirim Türleri
+   • Bilgi: Genel bilgilendirme
+   • Uyarı: Önemli uyarılar
+   • Hata: Hata bildirimleri
+   • Başarı: Başarı mesajları
+
+6.2. Bildirim Özellikleri
+   • Kullanıcı Bazlı: Her kullanıcı kendi bildirimlerini görür
+   • Toplu Bildirim: Admin/Librarian tüm üyelere gönderebilir
+   • Okundu/Okunmadı: Durum takibi
+   • Bildirim Silme: Kullanıcı silebilir
+   • Badge: Okunmamış bildirim sayısı
+   • Otomatik Bildirimler: Ödünç alma, iade, rezervasyon
+
+
+7. ETKİNLİK YÖNETİMİ
+───────────────────────────────────────────────────────────────────────────────
+
+7.1. Etkinlik İşlemleri
+   • Etkinlik Oluşturma: Ad, tarih, yer, açıklama
+   • Etkinlik Listeleme: Tüm etkinlikler
+   • Etkinlik Kayıt: Üyeler kayıt olabilir
+   • Katılımcı Listesi: Kayıtlı üyeler
+   • E-posta Bildirimi: Kayıt sonrası e-posta
+
+
+8. DESTEK SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+8.1. Destek Talepleri
+   • Talep Oluşturma: Konu, kategori, mesaj
+   • Talep Listeleme: Rol bazlı görüntüleme
+   • Talep Yanıtlama: Admin/Librarian yanıtlayabilir
+   • Durum Takibi: Açık, Cevaplandı, Kapalı
+   • Arama: Konu, kategori, mesaj ile arama
+
+
+9. KİTAP İSTEĞİ SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+9.1. İstek İşlemleri
+   • İstek Oluşturma: Üyeler kitap isteyebilir
+   • İstek Onaylama: Admin/Librarian onaylar
+   • İstek Reddetme: Red nedeni belirtilir
+   • Bildirim: Onay/red sonrası bildirim
+
+
+10. REZERVASYON SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+10.1. Masa Rezervasyonu
+   • Masa Listesi: Tüm masalar
+   • Rezervasyon: Tarih ve saat seçimi
+   • Rezervasyon Geçmişi: Tüm rezervasyonlar
+   • Rezervasyon İptal: Kullanıcı iptal edebilir
+
+
+11. RAPORLAMA VE İSTATİSTİKLER
+───────────────────────────────────────────────────────────────────────────────
+
+11.1. Raporlar
+   • Kitap Raporu: Tüm kitaplar, kategoriler
+   • Üye Raporu: Tüm üyeler, rolleri
+   • Ödünç Raporu: Tüm ödünç işlemleri
+   • Finansal Rapor: Gelir-gider detayları
+
+11.2. İstatistikler
+   • Toplam kullanıcı sayısı
+   • Toplam üye sayısı
+   • Toplam kitap sayısı
+   • Toplam ödünç sayısı
+   • Aktif ödünç sayısı
+   • Net gelir (Gelir - Gider)
+   • Bu ay yeni kullanıcı sayısı
+   • Bu ay ödünç sayısı
+
+11.3. Grafikler
+   • Aylık Ödünç İşlemleri: Son 6 ay
+   • Kategori Bazlı Kitap Dağılımı
+   • Kullanıcı Rolleri Dağılımı
+   • Aylık Gelir-Gider Grafiği
+
+
+12. E-POSTA VE SMS ENTEGRASYONU
+───────────────────────────────────────────────────────────────────────────────
+
+12.1. SMTP Mail
+   • SMTP Ayarları: Host, port, kullanıcı adı, şifre
+   • SSL/TLS Desteği
+   • HTML E-posta: Şablonlu e-postalar
+   • E-posta Şablonları:
+     - Kayıt hoş geldin mesajı
+     - E-posta doğrulama kodu
+     - Kitap ödünç alma bildirimi
+     - Etkinlik katılım bildirimi
+   • Test E-postası: Ayarları test etme
+
+12.2. VatanSMS
+   • SMS Gönderimi: API entegrasyonu
+   • Telefon Formatı: 5XXXXXXXXX
+   • SMS Şablonları: Özelleştirilebilir
+   • Test SMS: Ayarları test etme
+
+
+13. YEDEKLEME SİSTEMİ
+───────────────────────────────────────────────────────────────────────────────
+
+13.1. Google Drive Yedekleme
+   • Otomatik Yedekleme: Zamanlanmış yedekleme
+   • Manuel Yedekleme: İsteğe bağlı yedekleme
+   • OAuth 2.0: Google hesabı ile giriş
+   • Klasör Yönetimi: Belirli klasöre yükleme
+
+
+14. PERFORMANS OPTİMİZASYONU
+───────────────────────────────────────────────────────────────────────────────
+
+14.1. Cache Sistemi
+   • MemoryCache: Microsoft.Extensions.Caching.Memory
+   • Cache Stratejileri:
+     - VeryShort: 30 saniye (bakiye gibi sık değişen veriler)
+     - Short: 2 dakika (dinamik veriler)
+     - Default: 5 dakika (genel veriler)
+     - Long: 15 dakika (statik veriler - kategoriler)
+     - VeryLong: 30 dakika (çok statik veriler)
+   • Cache Invalidation: Pattern matching ile
+   • Lazy Loading: İhtiyaç duyulduğunda yükleme
+
+14.2. Veritabanı Optimizasyonu
+   • NOLOCK Hint: Read-only sorgularda
+   • Connection Pooling: Bağlantı havuzu
+   • Async Operations: Async/await
+   • Command Timeout: 30 saniye (veya 10 saniye)
+   • Parallel Loading: Paralel veri yükleme
+
+14.3. UI Optimizasyonu
+   • Double Buffering: Titreme önleme
+   • Lazy Loading: Tab açıldığında yükleme
+   • SuspendLayout/ResumeLayout: Layout optimizasyonu
+   • Thread-Safe UI: InvokeRequired/Invoke
+
+
+15. KULLANICI ARAYÜZÜ
+───────────────────────────────────────────────────────────────────────────────
+
+15.1. Modern Tasarım
+   • Guna.UI2 WinForms: Modern kontroller
+   • Gradient Arka Planlar: Renk geçişleri
+   • Shadow Decoration: Gölge efektleri
+   • Rounded Corners: Yuvarlatılmış köşeler
+   • Hover Efektleri: Mouse üzerine gelince
+   • Animasyonlar: Smooth geçişler
+
+15.2. Responsive Tasarım
+   • Tab Sistemi: Sekmeli yapı
+   • FlowLayoutPanel: Dinamik yerleşim
+   • DataGridView: Tablo görünümü
+   • Kart Tasarımı: Modern kartlar
+
+
+16. SİSTEM AYARLARI
+───────────────────────────────────────────────────────────────────────────────
+
+16.1. SMS Ayarları
+   • API Key/Secret: VatanSMS
+   • Endpoint: Özelleştirilebilir
+   • Gönderen Başlığı: Özelleştirilebilir
+   • Mesaj Şablonları: Özelleştirilebilir
+
+16.2. Mail Ayarları
+   • SMTP Host/Port: SMTP sunucusu
+   • Kullanıcı Adı/Şifre: SMTP kimlik bilgileri
+   • Gönderen E-posta: From adresi
+   • Gönderen Adı: From name
+   • SSL/TLS: Güvenlik ayarları
+   • E-posta Şablonları: Özelleştirilebilir
+
+16.3. Yedekleme Ayarları
+   • Google Drive: OAuth ayarları
+   • Klasör ID: Hedef klasör
+   • Zamanlama: Otomatik yedekleme
+
+
+17. DIŞ SERVİS ENTEGRASYONLARI
+───────────────────────────────────────────────────────────────────────────────
+
+17.1. Google Books API
+   • Kitap Arama: API ile arama
+   • Otomatik Bilgi: Yazar, ISBN, açıklama
+   • Resim İndirme: Kitap kapağı
+
+17.2. Stripe API
+   • Kredi Kartı Ödemeleri: Stripe Checkout
+   • Ödeme Onayı: Webhook desteği
+
+17.3. TC Kimlik Servisi
+   • TC Kimlik Doğrulama: Resmi servis
+   • Kayıt Kontrolü: TC Kimlik ile
+
+
+18. VERİTABANI YAPISI
+───────────────────────────────────────────────────────────────────────────────
+
+18.1. Ana Tablolar
+   • Users: Kullanıcılar
+   • Roles: Roller
+   • Books: Kitaplar
+   • Categories: Kategoriler
+   • BookCategories: Kitap-Kategori ilişkisi
+   • Loans: Ödünç işlemleri
+   • Penalties: Cezalar
+   • PenaltyRules: Ceza kuralları
+   • Notifications: Bildirimler
+   • Reservations: Rezervasyonlar
+   • TableReservations: Masa rezervasyonları
+   • Events: Etkinlikler
+   • EventParticipants: Etkinlik katılımcıları
+   • SupportTickets: Destek talepleri
+   • FinancialTransactions: Finansal işlemler
+   • SystemLogs: Sistem logları
+   • EmailVerificationCodes: E-posta doğrulama kodları
+
+
+19. ÖZEL ÖZELLİKLER
+───────────────────────────────────────────────────────────────────────────────
+
+19.1. Kitap Kataloğu
+   • Arama: Başlık, yazar, ISBN
+   • Kategori Filtreleme: Dropdown
+   • Kart Görünümü: Modern tasarım
+   • Detay Sayfası: Tam bilgiler
+   • Ödünç Alma: Direkt katalogdan
+
+19.2. Profil Yönetimi
+   • Profil Düzenleme: Ad, e-posta, telefon, adres
+   • Şifre Değiştirme: Güvenli şifre değiştirme
+   • TOTP Kurulumu: 2FA aktifleştirme
+   • Bakiye Görüntüleme: Anlık bakiye
+
+19.3. SSS (Sık Sorulan Sorular)
+   • Soru-Cevap: Önceden tanımlı
+   • Kategorize: Konu bazlı
+   • Arama: Soru içeriğinde
+
+
+20. SİSTEM LOGLARI
+───────────────────────────────────────────────────────────────────────────────
+
+20.1. Log Türleri
+   • Login: Giriş/çıkış
+   • Kitap İşlemleri: Ekleme, düzenleme, silme
+   • Ödünç İşlemleri: Ödünç verme, iade
+   • Finansal İşlemler: Bakiye, ödeme
+   • Sistem İşlemleri: Ayarlar, yedekleme
+
+20.2. Log Özellikleri
+   • IP Adresi: Kullanıcı IP'si
+   • Tarih/Saat: İşlem zamanı
+   • Kullanıcı: İşlemi yapan
+   • Açıklama: İşlem detayı
+   • Arama: Tarih aralığı ile
+
+
+═══════════════════════════════════════════════════════════════════════════════
+NOT: Bu sistem Windows Forms (.NET Framework 4.7.2) ve SQL Server (LocalDB)
+     kullanılarak geliştirilmiştir. Sistem, kütüphane yönetimi için gerekli
+     tüm temel ve gelişmiş özellikleri içermektedir.
+═══════════════════════════════════════════════════════════════════════════════
+
