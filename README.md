@@ -200,7 +200,7 @@ Sorularınız için issue açabilir veya dokümantasyonu inceleyebilirsiniz.
 
 ---
 
-<img width="1500" height="1500" alt="image" src="https://github.com/user-attachments/assets/2d39bd63-37a9-40fb-bf3a-bb8db1074f02" />
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/2d39bd63-37a9-40fb-bf3a-bb8db1074f02" />
 
 
 **Not**: Bu sistem Windows Forms tabanlı bir masaüstü uygulamasıdır. Web versiyonu bulunmamaktadır.
