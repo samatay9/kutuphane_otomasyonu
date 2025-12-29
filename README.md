@@ -199,8 +199,11 @@ Sorularınız için issue açabilir veya dokümantasyonu inceleyebilirsiniz.
 - API key'leri veritabanında saklanmaktadır (güvenlik için şifreleme önerilir)
 
 ---
+## Geri Bildirim
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/2d39bd63-37a9-40fb-bf3a-bb8db1074f02" />
+<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/2d39bd63-37a9-40fb-bf3a-bb8db1074f02" />
+
+Link :https://docs.google.com/forms/d/e/1FAIpQLScPWaRg7jzC5z9ovyAY1yYKGQ1pGPFoyv8jvGI9Pe857Uw9xA/viewform
 
 
 **Not**: Bu sistem Windows Forms tabanlı bir masaüstü uygulamasıdır. Web versiyonu bulunmamaktadır.
